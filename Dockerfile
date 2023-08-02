@@ -4,6 +4,9 @@
 
 FROM node:lts-slim As development
 
+# Install procps package
+RUN apt-get update && apt-get install -y procps
+
 # Create backend directory
 WORKDIR /backend
 
