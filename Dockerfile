@@ -13,13 +13,13 @@ WORKDIR /backend
 # Copy application dependency manifests to the container image.
 # A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
 # Copying this first prevents re-running npm install on every code change.
-COPY --chown=node:node  package.json package-lock.json ./
+COPY --chown=node:node  package*.json ./
 
 # Install app dependencies using the `npm ci` command instead of `npm install`
 RUN \
   if [ -f package-lock.json ]; then npm ci; \
   # Allow install without lockfile, so example works even without Node.js installed locally
-  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && npm ci; \
+  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && npm i; \
   fi
 
 # Bundle app source
